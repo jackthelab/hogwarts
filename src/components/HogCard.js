@@ -6,11 +6,13 @@ const plzWorkPigPic = (hogName) => {
     return pigImgs
   }
 
-const HogCard = ({ hog }) => {
+
+const HogCard = ({ hog, clickingAction }) => {
     return (
         <div className="pigTile">
             <h5>{ hog.name }</h5>
             <img src={plzWorkPigPic(hog.name)} className="minPigTile" alt="" />
+            <button onClick={clickingAction} id={hog.id} name={hog.name}>Show Details</button>
         </div>
     )
 }

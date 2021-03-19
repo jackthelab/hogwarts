@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Hogs from "../porkers_data";
 import HogCard from './HogCard'
 import OrganizeButton from './OrganizeButton'
+import HogDetails from './HogDetails'
 
 export default class HogContainer extends Component {
 
@@ -9,7 +10,8 @@ export default class HogContainer extends Component {
     super(props)
 
     this.state = {
-      hogs: Hogs 
+      hogs: Hogs,
+      selectedHog: null 
     }
 
   }
@@ -41,6 +43,13 @@ export default class HogContainer extends Component {
       })
     }
 
+    selectingHog = (hog) => {
+      this.setState({
+        selectedHog: hog
+      })
+    }
+    
+
   render() {
     return (
       <div>
@@ -50,7 +59,9 @@ export default class HogContainer extends Component {
           <OrganizeButton name="Sort By Weight" clickAction={this.hogsByWeight}/>
           <OrganizeButton name="Sort By Name"clickAction={this.hogsByName}/>
         </div>
-        {this.state.hogs.map(hog => <HogCard hog={hog}/>)}
+        <div>
+        {this.state.selectedHog ? <HogDetails selectedHog={this.state.selectedHog}/> : null }        </div>
+        <div>{this.state.hogs.map(hog => <HogCard hog={hog} clickingAction={ () => {this.selectingHog(hog)} }/>)}</div>
       </div>
     );
   }
